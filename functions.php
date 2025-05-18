@@ -33,10 +33,10 @@ function arttopia_enqueue() {
         wp_enqueue_style(
             'front-css',
             get_template_directory_uri(). '/assets/css/front-page.css',
-            array(),
+            array()
         );
     }
-    
+
 }
 add_action('wp_enqueue_scripts', 'arttopia_enqueue');
 
@@ -76,9 +76,13 @@ add_action('init', 'mytheme_admin_bar_settings');
 // load template part loop
 function load_theme_parts($context) {
     $registry = [
-        'front-page' => [
-            'template' => 'hero-section',
-            ]
-    ];
+
+        'front-website' => [
+            'hero-section' => [
+                'template' => 'hero-section',
+                'load_css' => false,
+                'load_js' => false,
+        ]
+    ]];
     return apply_filters("theme_sections_{$context}", $registry[$context] ?? []);
 }

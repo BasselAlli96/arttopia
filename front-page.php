@@ -7,15 +7,14 @@
 get_header();
 ?>
 
-<section id="front-page" class="front-page">
+<section id="main-page" class="main-front-page">
     <!-- add get template part here -->
-
     <?php
 
-    $front_sections = load_theme_parts('front-page');
+    $front_sections = load_theme_parts('front-website');
 
-        foreach ($front_sections as $section) {
-            get_template_part( 'template-part/front-page/' . $section['template']);
+        foreach ($front_sections as $sections) {
+            get_template_part( 'template-part/front-page/' . $sections[ 'template' ]);
         }
 
     ?>
