@@ -9,7 +9,7 @@
   
     <!-- Background Image -->
     
-      <img  class="section-image" src="<?php echo get_template_directory_uri(); ?>/assets/images/hero/Resin.jpg" alt="">
+      <img  class="section-image" src="<?php echo get_template_directory_uri(); ?>/assets/images/severices_section/Resin.jpg" alt="">
     
       <!-- Three Boxes Overlay -->
       <div class="box-container">
@@ -19,7 +19,7 @@
             <div class="box box-1 box-button">
 
               <div class="svg_icon">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/hero/gift.svg" alt="PS5 Icon" class="box-icon">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/severices_section/gift.svg" alt="PS5 Icon" class="box-icon">
               </div>
               <h3>Available PS5s</h3>
               <p>Check real-time status</p>
@@ -27,7 +27,7 @@
             <div class="box box-2 box-button">
 
               <div class="svg_icon">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/hero/gift.svg" alt="PS5 Icon" class="box-icon">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/severices_section/gift.svg" alt="PS5 Icon" class="box-icon">
               </div>
               <h3>Store Locator</h3>
               <p>Find nearest branch</p>
@@ -35,7 +35,7 @@
             </div>
 
             <div class="box box-3 box-button">
-              <div class="svg_icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/hero/gift.svg" alt="PS5 Icon" class="box-icon"></div>
+              <div class="svg_icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/severices_section/gift.svg" alt="PS5 Icon" class="box-icon"></div>
 
               <h3>Hourly Pricing</h3>
               <p>ادخل إلى عالم من الابداع
