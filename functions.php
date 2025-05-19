@@ -87,7 +87,10 @@ function load_theme_parts($context) {
                 'template' => 'services_section',
                 'load_css' => false,
                 'load_js' => false,
-                ]
+            ],
+            'deatures-part' => [
+                'template' => 'features-section'
+            ]
         ]
 ];
     return apply_filters("theme_sections_{$context}", $registry[$context] ?? []);
