@@ -9,6 +9,8 @@ get_header();
 ?>
 <section id="main-page" class="main-page">
     
+
+    
     <div id="main-front" class="front-hero">
 
         <div class="hero-container">
