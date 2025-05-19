@@ -142,3 +142,106 @@
     }
 }
 
+/*_________Services-Sections_________  */
+/* Container for the entire section section */
+.section-container {
+  position: relative;
+  width: 100%;
+  height: 80vh; /* Adjust height as needed */
+  overflow: hidden;
+  display: flex;   
+  flex-direction: column; 
+  
+  align-items: center;
+
+}
+.title_section{
+    display: flex; /* Enable flexbox on the title */
+    justify-content: center; /* Center the h1 horizontally */
+    align-items: center; /* Center the h1 vertically */
+}
+
+/* Background Image */
+.section-image {
+  position: absolute;
+  width: 85%;
+  height: 85%;
+  border-radius: 16px;
+  object-fit: cover;
+  display: flex;
+  background-position: center;
+  filter: brightness(0.7); /* Darken image for better text contrast */
+  z-index: 1;
+}
+
+/* Container for the three boxes */
+.box-container {
+  position: relative;
+  display: flex;
+  width: 75%;
+  justify-content: center;
+  gap: 7%;
+  z-index: 2;
+}
+.box-inside {
+    display: flex;
+    flex-direction: row;
+    height: 75vh;
+    align-items: end;
+    gap: 2rem;
+}
+
+/* Individual Box Styling */
+.box {
+  width: 100%;
+  height: 150px;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.5s;
+  display: flex;   
+  flex-direction: column; 
+  align-items: center;
+}
+.svg_icon{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  
+  transform: translateY(-90%);
+}
+
+.svg_icon img.box-icon {
+  width: 60px; /* Makes SVG bigger (adjust as needed) */
+  height: 60px; /* Maintain aspect ratio */
+}
+
+
+  .box h3 {
+    color: #333;
+    margin-bottom: 10px;
+    margin-top: 0;             /* Add this to remove default h3 margin */
+}
+.box p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 0;          /* Add this to remove default p margin */
+}
+
+.box:hover {
+  transform: translateY(-10px);
+}
+
+.box-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 15px;
+}
+
+
+
+/* Optional: Different colors for each box */
+.box-1 { background: rgba(174, 180, 177, 0.9); }
+.box-2 { background: rgba(174, 180, 177, 0.9); }
+.box-3 { background: rgba(174, 180, 177, 0.9); } 
+
