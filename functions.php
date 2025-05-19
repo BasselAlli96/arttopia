@@ -82,7 +82,13 @@ function load_theme_parts($context) {
                 'template' => 'hero-section',
                 'load_css' => false,
                 'load_js' => false,
+            ] ,
+            'features-part' => [
+                'template' => 'services_section',
+                'load_css' => false,
+                'load_js' => false,
+                ]
         ]
-    ]];
+];
     return apply_filters("theme_sections_{$context}", $registry[$context] ?? []);
 }
