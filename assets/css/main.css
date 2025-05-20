@@ -60,3 +60,38 @@ body {
     text-decoration: none; 
 
 }
+
+
+
+
+/* ________________________FOOTER CODE____________________________ */
+/* ________________________FOOTER CODE____________________________ */
+/* ________________________FOOTER CODE____________________________ */
+/* ________________________FOOTER CODE____________________________ */
+
+.site-footer {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    height: 50vh;
+    min-height: 30vh;
+}
+
+.footer-wedgits-area {
+    height: 100%;
+    color: white;
+    background-color: rgb(18, 168, 118);
+    justify-content: space-between;
+    padding: 1rem 2rem;
+}
+
+.footer-endside {
+    background-color: rgb(7, 114, 78);
+    color: #ffffff;
+    justify-content: center;
+}
+
+.webside-copyrights {
+    text-align: center;
+}
