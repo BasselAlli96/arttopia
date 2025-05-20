@@ -77,4 +77,104 @@ jQuery(document).ready(function($) {
     
     // Start the cycle after initial display time
     setTimeout(slideImages, displayTime);
+
+
+
+    // =============================================
+    // SHRINK HEADER FUNCTIONALITY
+    // =============================================
+
+    var $header = $('.site-header');
+    var $navMenu = $('.arttopia-header');
+    var $navUl = $('.nav-ul');
+    var $imgLogo =$('.arttopia-logo');
+    var $callUsButton = $('.call-us-list');
+    var scrollThreshold = 150;
+    var lastScroll = 50;
+    var ticking = false;
+
+    // this function add,remove (.shrink) class from siteheader etc..
+    function addRemoveShrink() {
+
+        var currentScroll = $(window).scrollTop();
+        var isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+        // added isMobaile so there is no shrink on mibile screen :)
+        if(currentScroll > scrollThreshold && !isMobile) {
+
+            $header.addClass('shrink');
+            $navMenu.addClass('shrink');
+            $navUl.addClass('shrink');
+            $imgLogo.addClass('shrink');
+            $callUsButton.addClass('blue-button');
+        } else {
+            $header.removeClass('shrink');
+            $navMenu.removeClass('shrink');
+            $navUl.removeClass('shrink');
+            $imgLogo.removeClass('shrink');
+            $callUsButton.removeClass('blue-button');            
+        }
+        ticking = false;
+    }
+
+    // applay changes with if condiation
+    $(window).on('scroll',function() {
+        lastScroll = $(window).scrollTop();
+        if(!ticking) {
+            window.requestAnimationFrame(addRemoveShrink);
+            ticking = true;
+        }
+    });
+
+
+
+    //=====================================//
+    //====== NAVIGATION MENU JavaScript====//
+    //=====================================//
+
+    // Elements
+    const toggleButton = document.querySelector('.mobile-menu-toggle');
+    const navUl = document.querySelector('.nav-ul');
+    const menuLinks = document.querySelectorAll('.nav-ul a');
+
+
+    // Separate functions for clarity
+    function openMenu() {
+        toggleButton.setAttribute('aria-expanded', 'true');
+        navUl.setAttribute('data-visible', 'true');
+    }
+
+    function closeMenu() {
+        toggleButton.setAttribute('aria-expanded', 'false');
+        navUl.setAttribute('data-visible', 'false');
+    }
+
+    // Initialize
+    toggleButton.addEventListener('click', toggleMenu);
+
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+        const isClickInsideMenu = navUl.contains(e.target);
+        const isClickOnToggle = e.target === toggleButton || toggleButton.contains(e.target);
+        
+        if (!isClickInsideMenu && !isClickOnToggle && navUl.getAttribute('data-visible') === 'true') {
+            closeMenu();
+        }
+    });
+
+    // Close when clicking links (optional)
+    menuLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    // Toggle function
+    function toggleMenu() {
+        const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+        if (isExpanded) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    }
+    
 });

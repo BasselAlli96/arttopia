@@ -26,40 +26,198 @@ body {
 /* ________________________HEADER CODE____________________________ */
 /* ________________________HEADER CODE____________________________ */
 .site-header {
-
+    display: flex;
     position: fixed;
     width: 100%;
-    background-color: rgb(255 255 255 / 0%);
-    height: 100px;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0);
+    height: 15vh;
     z-index: 1000;
+    transition: all 0.5s ease-in-out; /* Moved transition here */
 }
-.header-top {
+
+
+.arttopia-header {
+    height: 100%;
     width: 100%;
 }
 
-.header-container {
+.nav-ul {
     display: flex;
-    height: 100px;
-    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    justify-content: space-around;
+    padding: 0 0;
+    list-style: none;
+    margin: 0 auto;
+}
+
+.nav-ul a {
+    position: relative;
+    text-decoration: none;
+    color: #000000;
+    padding: 0.5rem 0;
+}
+
+
+.li-continer {
     width: 100%;
-    padding: 0 30px 0 30px;
+    display: flex;
+    justify-content: space-around;
+    align-self: center;
     align-items: center;
 }
-.nav-button{
-    background-color: transparent; /* White with 50% transparency */
-    color: black; /* Text color */
-    border: transparent; /* Black border with 50% transparency */
-    padding: 10px 20px;
-    font-size: 20px;
-    cursor: pointer;
-    
-    transition: background-color 0.3s, border 0.3s;
+
+/* Animated underline effect except logo and blue button*/
+.nav-ul li:not(.li-img, .blue-button) a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 2px;
+    background-color: #0000ff;
+    transition: width 0.3s ease;
 }
-.nav-menu a{
-    color: black;
-    text-decoration: none; 
+
+.nav-ul li:not(.li-img, .blue-button) a:hover::after {
+    width: 100%;
+}
+
+img.arttopia-logo {
+    width: 100%;
+    height: auto;
+    transition: all 0.5s ease;
+}
+
+
+/* SHRINKING HEADER PART  */
+.site-header.shrink {
+    background-color: #ffffff;
+    height: 10vh;
+    transition: all 0.5s ease-in-out;
+    border-bottom: 1px 0.5px #b8068b;
+    box-shadow: 0 1px 10px 1px #c7c7c7;
+}
+
+img.arttopia-logo.shrink {
+    width: 80%;
+    height: auto;
+    transition: all 0.5s ease;
+}
+.blue-button {
+    border: 0.5px #21bcd8 solid;
+    transition: all 0.5s ease-in-out;
+}
+.blue-button:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);;
+    transition: all 0.5s ease-in-out;
+}
+
+.blue-button {
+    background-color: aqua;
+    padding: 0.1rem 0.5rem;
+    border-radius: 20px;
+    transition: all 0.5s ease-in-out;
+}
+
+
+
+
+
+/* Default: Mobile Styles */
+.mobile-menu-toggle {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.nav-ul {
+    display: flex;
+    list-style: none;
+}
+
+
+/* Mobile Styles (Under 768px) */
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+        position: flex;
+        font-size: xxx-large;
+        z-index: 1001;
+    }
+
+    .nav-ul {
+        position: fixed;
+        top: 0;
+        right: -80%;
+        width: 80%;
+        height: 100vh;
+        background: #faf0fc;
+        flex-direction: column;
+        align-items: center;
+        padding: 4rem 1rem;
+        transition: transform 0.3s ease;
+        z-index: 1100;
+    }
+
+    .nav-ul[data-visible="true"] {
+        transform: translateX(-100%); /* Slide in from right */
+    }
+
+    .li-img {
+        position: absolute;
+        top: 75px;
+    }
+
+    .nav-header-mob {
+        display: flex;
+        justify-content: start;
+        gap: 5rem;
+        padding: 1rem 1rem;
+        background-color: #ffffff;
+        width: 100%;
+        height: auto;
+    }
+    .nav-ul li {
+        width: 100%; /* Make all li items full width */
+        text-align: center; /* Center text */
+        padding: 0.5rem 0; /* Reduced vertical padding */
+    }
+    .li-continer {
+        height: 50%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .logo-mobail-continer{
+        align-items: center;
+    }
+    .nav-ul a {
+        font-size: larger;
+        font-weight: bolder;
+    }
 
 }
+
+/* Desktop Styles */
+@media (min-width: 769px) {
+    .mobile-menu-toggle {
+        display: none;
+    }
+
+    .nav-header-mob {
+        display: none;
+    }
+}
+
+
+
+
 
 
 
