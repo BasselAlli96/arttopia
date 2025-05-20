@@ -59,8 +59,9 @@ function regsister_my_helpers(){
 }
 add_action('after_setup_theme', 'regsister_my_helpers');
 
+
 // wordpress admin bar display
-function mytheme_admin_bar_settings() {
+function arrtopia_admin_bar_settings() {
     // Always show for admins
     if (current_user_can('administrator')) {
         add_filter('show_admin_bar', '__return_true');
@@ -71,7 +72,8 @@ function mytheme_admin_bar_settings() {
         add_filter('show_admin_bar', '__return_false');
     }
 }
-add_action('init', 'mytheme_admin_bar_settings');
+add_action('init', 'arrtopia_admin_bar_settings');
+
 
 // load template part loop
 function load_theme_parts($context) {
@@ -88,10 +90,58 @@ function load_theme_parts($context) {
                 'load_css' => false,
                 'load_js' => false,
             ],
-            'deatures-part' => [
-                'template' => 'features-section'
+            'features-section' => [
+                'template' => 'features-section',
+                'load_css' => false,
+                'load_js' => false,
+            ],
+            'samples-part' => [
+                'template' => 'samples-section',
+                'load_css' => false,
+                'load_js' => false,
             ]
         ]
 ];
     return apply_filters("theme_sections_{$context}", $registry[$context] ?? []);
 }
+
+// register wedgits 
+function register_wp_wedgits() {
+
+    // register first wedgits on footer
+    register_sidebar( array(
+        'name' => 'footer wedgit one',
+        'id'   => 'footer_wedgit_one',
+        'description'   => 'This widget area discription',
+        'before_widget' => '<span class="footer-area footer-area-one">',
+        'after_widget'  => '</span>',
+        'before_title'  => '<h4>',
+        'after_title'   => '</h4>',
+        )
+    );
+
+    // register second wedgits on footer
+    register_sidebar( array(
+        'name' => 'footer wedgit second',
+        'id'   => 'footer_wedgit_second',
+        'description'   => 'This widget area discription',
+        'before_widget' => '<span class="footer-area footer-area-second">',
+        'after_widget'  => '</span>',
+        'before_title'  => '<h4>',
+        'after_title'   => '</h4>',
+        )
+    );
+
+    // register 3rd wedgits on footer
+    register_sidebar( array(
+        'name' => 'footer wedgit third',
+        'id'   => 'footer_wedgit_third',
+        'description'   => 'This widget area discription',
+        'before_widget' => '<span class="footer-area footer-area-third">',
+        'after_widget'  => '</span>',
+        'before_title'  => '<h4>',
+        'after_title'   => '</h4>',
+        )
+    );
+}
+add_action( 'widgets_init', 'register_wp_wedgits' );
