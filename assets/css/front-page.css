@@ -409,3 +409,93 @@
 }
 
 
+/*_________Featur-Sections_________  */
+
+
+.feature-sec {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+.slideshow-container {
+    width: 100vw;
+    height: 250px; /* Increased height for better text display */
+    position: relative;
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    
+    color: rgb(116, 55, 55);
+    padding: 30px;
+    transform: translateY(100%);
+    transition: transform 0.8s ease-in-out 0.3s; /* Delayed animation */
+}
+
+.slide.active .slide-content {
+    transform: translateY(0);
+}
+
+.slide-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+/* For centered text */
+.slide-content {
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, 100%);
+    text-align: center;
+    background: none;
+}
+
+.slide.active .slide-content {
+    transform: translate(-50%, -50%);
+}
+
+.slide-description {
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+/* Different text colors for each slide */
+.slide:nth-child(1) .slide-content {
+    color: #160102; /* Light pink */
+}
+
+.slide:nth-child(2) .slide-content {
+    color: #68ee0f; /* Light teal */
+}
+
+.slide:nth-child(3) .slide-content {
+    color: #b5ead7; /* Mint green */
+}

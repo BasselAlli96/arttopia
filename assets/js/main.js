@@ -176,5 +176,23 @@ jQuery(document).ready(function($) {
             openMenu();
         }
     }
+    document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            let currentSlide = 0;
+            
+            function nextSlide() {
+                // Hide current slide
+                slides[currentSlide].classList.remove('active');
+                
+                // Move to next slide
+                currentSlide = (currentSlide + 1) % slides.length;
+                
+                // Show next slide
+                slides[currentSlide].classList.add('active');
+            }
+            
+            // Change slide every 5 seconds (5000ms) - increased for better readability
+            setInterval(nextSlide, 5000);
+        });
     
 });
