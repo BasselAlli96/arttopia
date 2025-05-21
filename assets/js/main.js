@@ -4,7 +4,9 @@ jQuery(document).ready(function($) {
     let currentIndex = 0;
     const transitionTime = 1000; // 1s for animations
     const displayTime = 4000; // 4s display time
-    
+    const $slides = $('.slide');
+    let currentSlide = 0;
+    const slideInterval = 5000; // 5 seconds
     // Initialize - show first image and gradient
     // $gradientOverlays.eq(0).addClass('active');
     // $images.not('.active').css({
@@ -176,23 +178,14 @@ jQuery(document).ready(function($) {
             openMenu();
         }
     }
-    document.addEventListener('DOMContentLoaded', function() {
-            const slides = document.querySelectorAll('.slide');
-            let currentSlide = 0;
-            
-            function nextSlide() {
-                // Hide current slide
-                slides[currentSlide].classList.remove('active');
-                
-                // Move to next slide
-                currentSlide = (currentSlide + 1) % slides.length;
-                
-                // Show next slide
-                slides[currentSlide].classList.add('active');
-            }
-            
-            // Change slide every 5 seconds (5000ms) - increased for better readability
-            setInterval(nextSlide, 5000);
-        });
+    function nextSlide() {
+        $slides.removeClass('active').eq(currentSlide).removeClass('active');
+        currentSlide = (currentSlide + 1) % $slides.length;
+        $slides.eq(currentSlide).addClass('active');
+    }
+    
+    // Start slideshow
+    setInterval(nextSlide, slideInterval);
+    
     
 });
