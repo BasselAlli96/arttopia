@@ -409,3 +409,117 @@
 }
 
 
+/*_________Featur-Sections_________  */
+
+
+
+        /* Base Styles */
+.feature-sec {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    }
+.slideshow-container {
+    width: 100vw;
+    height: 56.25vw; /* 16:9 aspect ratio (calculated from width) */
+    max-height: 50vh; /* Limit maximum height */
+    min-height: 250px; /* Minimum height */
+    position: relative;
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    text-align: center;
+    width: 90%;
+    max-width: 800px;
+    padding: 20px;
+    transition: all 0.8s ease-in-out 0.3s;
+    will-change: transform, color;
+}
+
+.slide.active .slide-content {
+    transform: translate(-50%, -50%);
+}
+
+.slide-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem); /* Responsive font size */
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    transition: color 0.5s ease-in-out;
+}
+
+.slide-description {
+    font-size: clamp(0.9rem, 2vw, 1.2rem); /* Responsive font size */
+    line-height: 1.5;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    transition: color 0.5s ease-in-out;
+}
+
+/* Different text colors for each slide */
+.slide:nth-child(1) .slide-content {
+    color: #ff6b6b; /* Soft red */
+}
+
+.slide:nth-child(2) .slide-content {
+    color: #4ecdc4; /* Teal */
+}
+
+.slide:nth-child(3) .slide-content {
+    color: #ffe66d; /* Yellow */
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+    .slideshow-container {
+        height: 75vw; /* Taller aspect ratio for mobile */
+        max-height: none;
+    }
+    
+    .slide-content {
+        padding: 15px;
+        width: 95%;
+    }
+    
+    .slide-title {
+        margin-bottom: 10px;
+    }
+}
+
+/* Very small devices */
+@media (max-width: 480px) {
+    .slide-content {
+        transform: translate(-50%, 30%);
+    }
+    
+    .slide.active .slide-content {
+        transform: translate(-50%, -50%);
+    }
+}
