@@ -4,49 +4,19 @@ jQuery(document).ready(function($) {
     let currentIndex = 0;
     const transitionTime = 1000; // 1s for animations
     const displayTime = 4000; // 4s display time
-    
-    // Initialize - show first image and gradient
-    // $gradientOverlays.eq(0).addClass('active');
-    // $images.not('.active').css({
-    //     'transform': 'translateX(-100%) translateY(20%) rotateZ(10deg)',
-    //     'z-index': 0
-    // });
+
 
     function slideImages() {
-        const nextIndex = (currentIndex + 1) % $images.length; // This % ensures it loops back to 0 after reaching the end
+        const nextIndex = (currentIndex + 1); // This % ensures it loops back to 0 after reaching the end
         const $currentImg = $images.eq(currentIndex);
         const $nextImg = $images.eq(nextIndex);
         const $currentGradient = $gradientOverlays.eq(currentIndex);
         const $nextGradient = $gradientOverlays.eq(nextIndex);
-        
-        // Only continue if we're not completing the cycle
-        if (currentIndex === $images.length - 1) {
-            // Final transition back to first image
-            $currentImg.css({
-                'transform': 'translateX(-150%) translateY(-20%) rotateZ(-10deg)',
-                'z-index': 0,
-                'transition': `transform ${transitionTime/1000}s cubic-bezier(0.5, 0, 0.1, 1)`
-            });
-            
-            $nextImg.css({
-                'transform': 'translateX(0) translateY(0) rotateZ(0)',
-                'z-index': 3,
-                'transition': `transform ${transitionTime/1000}s cubic-bezier(0.5, 0, 0.1, 1)`
-            }).addClass('active');
-            
-            // Gradient transition
-            $currentGradient.removeClass('active');
-            $nextGradient.addClass('active');
-            
-            $currentImg.removeClass('active');
-            return; // Stop the animation cycle
+                // Continue only if not reaching the last image
+        if (!(currentIndex === $images.length - 2 && nextIndex === 3)) {
+            setTimeout(slideImages, displayTime);
         }
-        
-        // Prepare next image
-        // $nextImg.css({
-        //     'transform': 'translateX(-100%) translateY(20%) rotateZ(10deg)',
-        //     'z-index': 2
-        // });
+
         
         // Animate out current image
         $currentImg.css({
@@ -69,10 +39,7 @@ jQuery(document).ready(function($) {
         $currentImg.removeClass('active');
         currentIndex = nextIndex;
         
-        // Continue only if not reaching the last image
-        if (!(currentIndex === $images.length - 1 && nextIndex === 0)) {
-            setTimeout(slideImages, displayTime);
-        }
+
     }
     
     // Start the cycle after initial display time
@@ -89,14 +56,15 @@ jQuery(document).ready(function($) {
     var $navUl = $('.nav-ul');
     var $imgLogo =$('.arttopia-logo');
     var $callUsButton = $('.call-us-list');
-    var scrollThreshold = 150;
-    var lastScroll = 50;
+    var scrollThreshold = 25;
+    var lastScroll = 25;
     var ticking = false;
 
     // this function add,remove (.shrink) class from siteheader etc..
     function addRemoveShrink() {
 
         var currentScroll = $(window).scrollTop();
+        // console.log(currentScroll)
         var isMobile = window.matchMedia('(max-width: 768px)').matches;
 
         // added isMobaile so there is no shrink on mibile screen :)
@@ -137,8 +105,7 @@ jQuery(document).ready(function($) {
     const navUl = document.querySelector('.nav-ul');
     const menuLinks = document.querySelectorAll('.nav-ul a');
 
-
-    // Separate functions for clarity
+    // Separated functions for clarity
     function openMenu() {
         toggleButton.setAttribute('aria-expanded', 'true');
         navUl.setAttribute('data-visible', 'true');
@@ -177,4 +144,37 @@ jQuery(document).ready(function($) {
         }
     }
     
+
+
+    // ================================
+    // =======Gallery fade out effect=======
+    // ================================
+    // Select ALL gallery item containers (note corrected spelling)
+
+
+    function animateGalleryItems() {
+        const $items = $('.category-item');
+        const observer = new IntersectionObserver
+        (
+            function(entries) {
+                entries.forEach
+                (
+                    function(entry, index) {
+                        if (entry.isIntersecting) {
+                            setTimeout(function() {
+                                $(entry.target).addClass('is-visible');
+                            }, 500 * index);
+                        }
+                });
+            }, {threshold: 0.1});
+
+        $items.each(function() {
+            observer.observe(this);
+        });
+    }
+
+    animateGalleryItems();
+
+
+
 });

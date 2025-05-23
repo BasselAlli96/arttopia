@@ -1,0 +1,181 @@
+.gallary-section {
+    display: flex;
+    /* position: relative; */
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    height: 350vh; /* from 215vh */
+    justify-content: center;
+}
+
+.intro-gal-cont {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-image: url('http://arttopia.test/wp-content/themes/arttopia-template/assets/images/x.webp');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.intro-gal-cont::after {
+    position: absolute;
+    content: '';
+    bottom: -2px;
+    left: 0;
+    height: 150px;
+    width: 100%;
+    background-image: url('http://arttopia.test/wp-content/themes/arttopia-template/assets/images/svg/wave.svg');
+    background-position: bottom;
+    background-size: cover;
+}
+.intro-gal-txt {
+    position: relative; /* This is crucial */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+    font-size: x-large;
+    z-index: 15;
+}
+
+.intro-gal-txt::before {
+    content: '';
+    position: absolute;
+    width: min(600px, 90%);
+    height: min(200px, 25vh);
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(4px);
+    background-color: #dfdfdf21;
+    border-radius: 25px;
+    z-index: -1;
+    border: #ffc50030 1px solid;
+    box-shadow: 2px 2px 20px #6f654299;
+}
+
+.intro-gal-txt p {
+    margin: 0;
+}
+
+.gallary-intro {
+    width: 100%;
+    height: 100%;
+    align-content: end;
+}
+.gallary-intro img {
+    vertical-align: bottom;
+}
+
+
+.gallery-container {
+    display: flex;
+    /* background-color: #f1c707ad; */
+    flex-direction: column;
+    width: 100%;
+    height: 250vh;
+    justify-content: space-around;
+    /* z-index: -5; */
+}
+
+.gallery-item-continer {
+    display: flex;
+    position: relative;
+    gap: 3rem;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 175vh;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.category-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 28%;
+    font-size: clamp(15px, 1rem, 1.5rem);
+    padding: 1rem;
+    text-align: right;
+    opacity: 0;
+    align-items: center;
+    background-color: rgb(0, 0, 0);
+    border-radius: 7px;
+    transition: opacity 1s ease;
+    z-index: 0;
+    border: #b2bccc30 1px solid;
+    box-shadow: -6px 7px 30px -12px #6f654299;
+}
+
+.category-item.is-visible {
+    opacity: 1;
+}
+
+
+
+
+
+.category-item img {
+    width: clamp(100px, 135px, 200px);
+}
+
+.galley-button-continer {
+    position: relative;
+    width: 100%;
+}
+
+.category-item a {
+    position: relative;
+    display: flex;
+    width: 50%;
+    text-decoration: none;
+    color: #ffffff;
+    border-right: 4px solid #fffb26;
+    box-shadow: 8px 2px 16px -10px #2121216e;
+    padding: 0px 10px;
+    transition: all 0.1s ease;
+}
+
+.category-item a:hover {
+    color: #000000;
+    transition: all 0.1s ease;
+}
+
+.category-item a::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 100%;
+    background-color: rgb(255 251 38);
+    transition: all 0.1s ease;
+}
+
+.category-item a:hover::after {
+    width: 100%;
+    z-index: -1;
+}
+.category-item h3,p:not(.gallery-button) {
+    color: #ffffff;
+}
+
+
+span.gallery-txt-title {
+    display: block;
+    text-align: center;
+    font-size: clamp(1em, 1em, 5em);
+    width: 100%;
+    height: 25vh;
+    padding: 0rem 0 1rem 0;
+}
+
+
