@@ -5,6 +5,15 @@ jQuery(document).ready(function($) {
     const transitionTime = 1000; // 1s for animations
     const displayTime = 4000; // 4s display time
 
+    const $slides = $('.slide');
+    let currentSlide = 0;
+    const slideInterval = 5000; // 5 seconds
+    // Initialize - show first image and gradient
+    // $gradientOverlays.eq(0).addClass('active');
+    // $images.not('.active').css({
+    //     'transform': 'translateX(-100%) translateY(20%) rotateZ(10deg)',
+    //     'z-index': 0
+    // });
 
     function slideImages() {
         const nextIndex = (currentIndex + 1); // This % ensures it loops back to 0 after reaching the end
@@ -143,6 +152,15 @@ jQuery(document).ready(function($) {
             openMenu();
         }
     }
+    function nextSlide() {
+        $slides.removeClass('active').eq(currentSlide).removeClass('active');
+        currentSlide = (currentSlide + 1) % $slides.length;
+        $slides.eq(currentSlide).addClass('active');
+    }
+    
+    // Start slideshow
+    setInterval(nextSlide, slideInterval);
+    
     
 
 
