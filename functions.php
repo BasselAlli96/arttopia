@@ -39,6 +39,7 @@ function arttopia_enqueue() {
         );
     }
 
+    
     if (is_page('gallary')) {
         wp_enqueue_style(
             'gallary-css',
@@ -52,6 +53,23 @@ function arttopia_enqueue() {
             get_template_directory_uri() . '/assets/js/gallary.js',
             array(),
             filemtime(get_template_directory() . '/assets/js/gallary.js')
+        );
+    }
+
+   // load  gallaery-taxenomy.css only for gallaery taxenomy 
+    if (is_tax('artwork_type')) {
+        wp_enqueue_style(
+            'taxenomy-galley-css',
+            get_template_directory_uri(). '/assets/css/gallaery-taxenomy.css',
+            array()
+        );
+
+        wp_enqueue_script(
+            'taxenomy-galley-js',
+            get_template_directory_uri(). '/assets/js/gallaery-taxenomy.js',
+            array( 'jquery' ),
+            filemtime(get_template_directory() . '/assets/js/gallaery-taxenomy.js'),
+            true
         );
     }
 
@@ -165,7 +183,7 @@ function register_wp_wedgits() {
 add_action( 'widgets_init', 'register_wp_wedgits' );
 
 //=====================================================
-//   CUSTOM DATABASE FOR ARTS + NEW POST TYPE + TAXENOMY
+//   CUSTOM POSTMETA FOR ARTS + NEW POST TYPE + TAXENOMY
 //=====================================================
 
 function register_artworks_post_type() {
@@ -228,7 +246,11 @@ function register_artwork_types_taxonomy() {
         'show_ui'           => true,
         'show_admin_column' => true,
         'query_var'         => true,
-        'rewrite'           => array('slug' => 'artwork-type'),
+        'rewrite'           => array(
+            'slug' => 'artwork-type',
+            'with_front' => false, // Important for pagination
+            'hierarchical' => false
+        ),
         'show_in_rest'      => true,
     );
 
@@ -306,3 +328,30 @@ function save_artwork_meta($post_id) {
 }
 add_action('save_post_artwork', 'save_artwork_meta');
 
+
+function get_current_url_slug() {
+    // Get the current URL path
+    $url = wp_parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    
+    // Extract the last part of the path
+    $slug = basename(trim($url, '/'));
+    
+    return $slug;
+}
+
+// Usage:
+$current_slug = get_current_url_slug(); // Returns 'gallery' in your case
+
+// Fix taxonomy pagination
+function fix_artwork_taxonomy_pagination($query) {
+    if (!is_admin() && $query->is_main_query() && is_tax('artwork_type')) {
+        $query->set('posts_per_page', 3);
+    }
+}
+add_action('pre_get_posts', 'fix_artwork_taxonomy_pagination');
+
+// Flush rewrite rules on theme activation
+function artwork_flush_rewrites() {
+    flush_rewrite_rules();
+}
+add_action('after_switch_theme', 'artwork_flush_rewrites');

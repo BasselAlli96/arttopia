@@ -6,21 +6,22 @@
 get_header(); ?>
 
 <?php
-// Define your image paths (relative to theme)
-$images_rel_path = array(
-    // key is taxonomy term slug, value is relative path to image
-    'clocks'   => '/assets/images/gallery-images/clocks.png',
-    'risen-arts' => '/assets/images/gallery-images/risen-arts.png',
-    'paint-arts' => '/assets/images/gallery-images/paint-arts.png',
-    'gifts'      => '/assets/images/gallery-images/gifts.png',
-    'personal-paint' => '/assets/images/gallery-images/gifts.png'
-);
+    // Define your image paths (relative to theme)
+    $images_rel_path = array(
+        // key is taxonomy term slug, value is relative path to image
+        'clocks'   => '/assets/images/gallery-images/clocks.png',
+        'risen-arts' => '/assets/images/gallery-images/risen-arts.png',
+        'paint-arts' => '/assets/images/gallery-images/paint-arts.png',
+        'gifts'      => '/assets/images/gallery-images/gifts.png',
+        'personal-paint' => '/assets/images/gallery-images/gifts.png',
+        'm-cover' => '/assets/images/gallery-images/gifts.png'
+    );
 ?>
 
 
 <section id="main-gallary" class="gallary-section">
 
-    <div class="intro-gal-cont">
+    <div class="intro-gal-cont <?php $current_slug ?>">
 
         <div class="intro-gal-txt">
             <h1>معرض يوتوبيا</h1>
