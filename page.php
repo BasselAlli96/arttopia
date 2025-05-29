@@ -19,6 +19,8 @@ get_header(); ?>
                 comments_template();
             endif;
 
+            bloginfo('name');
+
         endwhile;
     ?>
 

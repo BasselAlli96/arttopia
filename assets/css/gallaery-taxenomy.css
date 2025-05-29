@@ -1,0 +1,284 @@
+.main-gallery-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height:max-content;
+    padding: 0 1rem;
+}
+
+.gallery-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 300px;
+    font-size: clamp(1em, 1.3em, 1.5em);
+}
+
+.gallery-continer {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
+    height: max-content;
+    padding: 0 0 1rem;
+    justify-content: space-evenly;
+
+}
+
+.gallery-card {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    height: 65vh;
+    min-height: 50vh;
+    border: 1px solid #0000003d;
+    box-shadow: 1px 4px 12px 1px #0000004a;
+    /* min-height: 20%; */
+    /* padding: 1rem; */
+}
+
+.card-thumbnail {
+    position: relative;
+    /* border-radius: 12px; */
+    width: 100%;
+    height: 70%;
+}
+
+.card-thumbnail img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+.card-thumbnail::after {
+    position: absolute;
+    content: '';
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 43%) 30%, rgb(0 0 0 / 78%) 100%);
+    z-index: -1;
+}
+
+
+.card-solid-box {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    height: 30%;
+    /* z-index: -1; */
+    /* min-height: 50%; */
+    /* border: 1px solid; */
+}
+
+
+
+.artwork-overlay {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    background: #f0f0f0;
+    font-size: clamp(0.8rem, 1rem, 1.5rem);
+    justify-content: space-around;
+    padding: 0 1rem;
+    color: #000000;
+}
+
+.artwork-overlay h3 {
+    margin: 0;
+}
+
+span.post-meta-detiles {
+    display: flex;
+    flex-direction: column;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    width: 100%;
+    padding: 0 0.5rem;
+    justify-content: center;
+    height: 34%;
+    color: #ffffff;
+
+}
+
+.post-date {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: #ffffff;
+    font-size: small;
+    padding: 0 0.5rem;
+}
+
+post-meta-detiles span {
+    width: 100%;
+}
+
+.color-chip-continer {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 2px;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.artwork-ratio-continer {
+    width: 100%;
+    height: 100%;
+}
+
+.artwork-ratio {
+    display: inline-block;
+    padding: 0.5rem 0;
+    border-radius: 20px;
+    width: 50%;
+}
+.non-artwork-ration {
+        width: 50%;
+}
+
+.color-palette {
+    display: flex;
+    gap: 5px;
+    margin-top: 0.8rem;
+}
+.color-chip {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.non-color-chip {
+    width: 50%;
+}
+
+.artwork-button {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.artwork-button a {
+    text-decoration: none;
+    color: #000000;
+    text-align: center;
+    background-color: #cbcbff;
+    border-radius: 10px;
+    width: 75%;
+    padding: 0.5rem;
+}
+
+.gallery-pagination {
+    text-align: center;
+    margin: 40px 0;
+    direction: ltr; /* For RTL sites, change to rtl if needed */
+}
+
+.gallery-pagination ul {
+    display: inline-flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.gallery-pagination li {
+    margin: 0 5px;
+}
+
+.gallery-pagination a,
+.gallery-pagination span {
+    display: block;
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    color: #333;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.gallery-pagination a:hover {
+    background: #f5f5f5;
+}
+
+.gallery-pagination .current {
+    background: #2c3e50;
+    color: white;
+    border-color: #2c3e50;
+}
+
+.gallery-pagination .dots {
+    border: none;
+    padding: 8px 5px;
+}
+
+
+@media (max-width: 768px) {
+
+
+}
+@media (max-width: 450px) {
+
+.gallery-continer {
+    position: relative;
+    flex-direction: column;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    /* justify-content: center; */
+}
+
+.gallery-card {
+    width: 100%;
+    flex-direction: row-reverse;
+    display: flex;
+    height: 30vh;
+    min-height: 15vh;
+}
+
+.card-thumbnail {
+    height: 100%;
+    width: 100%;
+}
+.card-thumbnail::after {
+}
+
+
+.card-solid-box {
+    display: none;
+    /* flex-direction: row; */
+    width: 45%;
+    height: 100%;
+}
+
+.artwork-overlay {
+    padding: 0.3rem 0.3rem;
+    height: 100%;
+    border-radius: 0px;
+} 
+
+.image-click {
+    display: flex;
+    height: 100%;
+}
+
+.post-meta-detiles {
+
+
+}
+
+.artwork-button {
+
+}
+
+    
+}

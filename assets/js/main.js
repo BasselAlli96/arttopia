@@ -5,15 +5,7 @@ jQuery(document).ready(function($) {
     const transitionTime = 1000; // 1s for animations
     const displayTime = 4000; // 4s display time
 
-    const $slides = $('.slide');
-    let currentSlide = 0;
-    const slideInterval = 5000; // 5 seconds
-    // Initialize - show first image and gradient
-    // $gradientOverlays.eq(0).addClass('active');
-    // $images.not('.active').css({
-    //     'transform': 'translateX(-100%) translateY(20%) rotateZ(10deg)',
-    //     'z-index': 0
-    // });
+
 
     function slideImages() {
         const nextIndex = (currentIndex + 1); // This % ensures it loops back to 0 after reaching the end
@@ -66,7 +58,7 @@ jQuery(document).ready(function($) {
     var $imgLogo =$('.arttopia-logo');
     var $callUsButton = $('.call-us-list');
     var scrollThreshold = 25;
-    var lastScroll = 25;
+    var lastScroll = 60;
     var ticking = false;
 
     // this function add,remove (.shrink) class from siteheader etc..
@@ -102,6 +94,8 @@ jQuery(document).ready(function($) {
             ticking = true;
         }
     });
+
+
 
 
 
@@ -143,6 +137,8 @@ jQuery(document).ready(function($) {
         link.addEventListener('click', closeMenu);
     });
 
+
+
     // Toggle function
     function toggleMenu() {
         const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
@@ -152,6 +148,14 @@ jQuery(document).ready(function($) {
             openMenu();
         }
     }
+
+
+    // ===================================================
+    // ===========
+    const $slides = $('.slide');
+    let currentSlide = 0;
+    const slideInterval = 5000; // 5 seconds
+
     function nextSlide() {
         $slides.removeClass('active').eq(currentSlide).removeClass('active');
         currentSlide = (currentSlide + 1) % $slides.length;
@@ -161,13 +165,12 @@ jQuery(document).ready(function($) {
     // Start slideshow
     setInterval(nextSlide, slideInterval);
     
-    
+
 
 
     // ================================
     // =======Gallery fade out effect=======
     // ================================
-    // Select ALL gallery item containers (note corrected spelling)
 
 
     function animateGalleryItems() {

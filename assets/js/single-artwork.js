@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {
     // Cache elements
     const $slider = $('.artwork-slider-continer');
-    const $slides = $('.artwork-slide-box');
+    const $slides = $('.artwork-slid-box');
     const $prevBtn = $('.slider-prev');
     const $nextBtn = $('.slider-next');
     
@@ -62,4 +62,6 @@ jQuery(document).ready(function($) {
     // Initialize mobile view
     handleMobileView();
     $(window).on('resize', handleMobileView);
+
+    
 });
