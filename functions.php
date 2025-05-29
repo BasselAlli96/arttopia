@@ -6,8 +6,11 @@ add_theme_support('post-thumbnails');
 add_theme_support('html5', ['comment-list', 'comment-form', 'search-form']);
 add_theme_support('category-thumbnails');
 
+// In your theme's functions.php
+require_once get_template_directory() . '/inc/artwork-ratings.php';
 
- // Enqueue style & Js files
+
+// Enqueue style & Js files
 function arttopia_enqueue() {
 
     // enqueue style files on WP
@@ -29,6 +32,8 @@ function arttopia_enqueue() {
         filemtime(get_template_directory() . '/assets/js/main.js'),
         true
     );
+
+
 
     //only load front page css file on front-page.php
     if (is_front_page()) {
@@ -73,8 +78,58 @@ function arttopia_enqueue() {
         );
     }
 
+    if (is_singular('artwork')) {
+        wp_enqueue_style
+        (
+            'single-artwork-css',
+            get_template_directory_uri() . '/assets/css/single-artwork.css',
+            array(),
+            filemtime(get_template_directory() . '/assets/css/single-artwork.css')
+        );
+
+        wp_enqueue_script
+        (
+            'single-artwork-js',
+            get_template_directory_uri() . '/assets/js/single-artwork.js',
+            array( 'jquery' ),
+            filemtime(get_template_directory() . '/assets/js/single-artwork.js'),
+            true
+        );
+    }
+
 }
 add_action('wp_enqueue_scripts', 'arttopia_enqueue');
+
+
+/**
+ * Enqueue admin assets for artwork gallery
+ */
+function enqueue_artwork_gallery_admin_assets($hook) {
+    global $post_type;
+    
+    // Only load on our post type edit screen
+    if (($hook == 'post-new.php' || $hook == 'post.php') && $post_type == 'artwork') {
+        wp_enqueue_media(); // Ensure media scripts are loaded
+        
+        wp_enqueue_script(
+            'artwork-gallery-admin',
+            get_template_directory_uri() . '/assets/js/admin/artwork-gallery.js',
+            ['jquery', 'jquery-ui-sortable'],
+            filemtime(get_template_directory() . '/assets/js/admin/artwork-gallery.js'),
+            true
+        );
+        
+        wp_enqueue_style(
+            'artwork-gallery-admin',
+            get_template_directory_uri() . '/assets/css/admin/artwork-gallery.css',
+            [],
+            filemtime(get_template_directory() . '/assets/css/admin/artwork-gallery.css')
+        );
+    }
+}
+add_action('admin_enqueue_scripts', 'enqueue_artwork_gallery_admin_assets');
+
+
 
 // register all navigations + custom logo
 function regsister_my_helpers(){
@@ -133,6 +188,19 @@ function load_theme_parts($context) {
             ],
             'samples-part' => [
                 'template' => 'samples-section',
+                'load_css' => false,
+                'load_js' => false,
+            ]
+        ],
+        'single-artwork' => [
+            'header' => [
+                'template' => 'artwork-header',
+            ],
+            'share-art-section' => [
+                'template' => 'share-art'
+            ],
+            'gallery-part' => [
+                'template' => 'singel-gallery',
                 'load_css' => false,
                 'load_js' => false,
             ]
@@ -262,12 +330,13 @@ add_action('init', 'register_artwork_types_taxonomy');
 function add_artwork_meta_boxes() {
     add_meta_box
     
+    
     (
         'artwork_properties',
 
         __('خصائص العمل الفني', 'arttopia'),
 
-        'render_artwork_properties_meta_box', // this is function to render the box
+        'render_artwork_properties_meta_box', // function that to render metabox
 
         'artwork', // this is mention artwork post type
 
@@ -281,27 +350,74 @@ add_action('add_meta_boxes', 'add_artwork_meta_boxes');
 function render_artwork_properties_meta_box($post) {
     
     // Get existing values
-    $ratio = get_post_meta($post->ID, '_artwork_ratio', true);
-    $colors = get_post_meta($post->ID, '_artwork_colors', true);
-    
+    $ratio   = get_post_meta($post->ID, '_artwork_ratio', true);
+    $colors  = get_post_meta($post->ID, '_artwork_colors', true);
+    $exetime = get_post_meta($post->ID, '_artwork_exetime', true); // execution time for project
+    $price   = get_post_meta($post->ID, '_price', true);
+    // Get existing gallery images
+    $gallery_images = get_post_meta($post->ID, '_artwork_gallery_images', true);
+    $gallery_images = !empty($gallery_images) ? explode(',', $gallery_images) : array();
+
+
     // Security field
     wp_nonce_field('artwork_meta_save', 'artwork_meta_nonce');
     ?>
     
     <div class="artwork-meta-fields">
         <p>
-            <label for="artwork_ratio"><?php _e('نسبة الألوان:', 'arttopia'); ?></label>
+            <label for="artwork_ratio"><?php _e('الأبعاد', 'arttopia'); ?></label>
             <input type="text" id="artwork_ratio" name="artwork_ratio" 
                    value="<?php echo esc_attr($ratio); ?>" class="widefat">
         </p>
-        
+
+        <p>
+            <label for="artwork_exetime"><?php _e('وقت التنفيذ', 'arttopia'); ?></label>
+            <input type="text" id="artwork_exetime" name="artwork_exetime" 
+                   value="<?php echo esc_attr($exetime); ?>" class="widefat">
+        </p>
+
         <p>
             <label for="artwork_colors"><?php _e('الألوان المستخدمة:', 'arttopia'); ?></label>
             <input type="text" id="artwork_colors" name="artwork_colors" 
                    value="<?php echo esc_attr($colors); ?>" class="widefat">
-            <small><?php _e('أدخل الألوان مفصولة بفواصل', 'arttopia'); ?></small>
+            <small><?php _e('أدخل الألوان باللغة الانجليزية مفصولة بفواصل', 'arttopia'); ?></small>
+        </p>
+
+        <p>
+            <label for="price"><?php _e('السعر', 'arttopia'); ?></label>
+                <input type="text" id="price" name="price"
+                class="widefat" value="<?php echo esc_attr($price); ?>">
         </p>
     </div>
+
+    <div class="artwork-gallery-container">
+        <ul class="artwork-gallery-images">
+
+            <?php
+            if (!empty($gallery_images)) {
+                foreach ($gallery_images as $image_id) {
+                    if ($image = wp_get_attachment_image_src($image_id)) {
+                        echo '<li data-attachment-id="' . esc_attr($image_id) . '">
+                                <img src="' . esc_url($image[0]) . '" />
+                                <a href="#" class="delete-artwork-image" title="' . esc_attr__('Remove image', 'arttopia') . '"> × </a>
+                              </li>';
+                    }
+                }
+            }
+            ?>
+
+        </ul>
+
+        <input type="hidden" id="artwork_gallery_images" name="artwork_gallery_images" 
+        value="<?php echo esc_attr(implode(',', $gallery_images)); ?>" />
+
+
+        <p class="add-artwork-gallery-images hide-if-no-js">
+            <a href="#" class="button button-primary"><?php _e('Add Gallery Images', 'arttopia'); ?></a>
+        </p>
+
+    </div>
+
     <?php
 }
 
@@ -325,6 +441,18 @@ function save_artwork_meta($post_id) {
     if (isset($_POST['artwork_colors'])) {
         update_post_meta($post_id, '_artwork_colors', sanitize_text_field($_POST['artwork_colors']));
     }
+    if (isset($_POST['artwork_exetime'])) {
+        update_post_meta($post_id, '_artwork_exetime',sanitize_text_field($_POST['artwork_exetime']));
+    }
+
+    if (isset($_POST['price'])) {
+        update_post_meta($post_id, '_price', sanitize_text_field($_POST['price']));
+    }
+
+    if(isset($_POST['artwork_gallery_images'])) {
+        update_post_meta($post_id, '_artwork_gallery_images', sanitize_text_field($_POST['artwork_gallery_images']));
+    }
+    
 }
 add_action('save_post_artwork', 'save_artwork_meta');
 
@@ -355,3 +483,8 @@ function artwork_flush_rewrites() {
     flush_rewrite_rules();
 }
 add_action('after_switch_theme', 'artwork_flush_rewrites');
+
+
+
+
+
