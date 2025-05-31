@@ -8,6 +8,7 @@ add_theme_support('category-thumbnails');
 
 // In your theme's functions.php
 require_once get_template_directory() . '/inc/artwork-ratings.php';
+require_once get_template_directory() . '/inc/related-posts.php';
 
 
 // Enqueue style & Js files
@@ -31,6 +32,13 @@ function arttopia_enqueue() {
         array( 'jquery' ),
         filemtime(get_template_directory() . '/assets/js/main.js'),
         true
+    );
+
+    wp_enqueue_style(
+        'widget-css',
+        get_template_directory_uri() . '/assets/css/widget.css',
+        array(),
+        filemtime(get_template_directory() . '/assets/css/widget.css'),
     );
 
 
@@ -63,8 +71,6 @@ function arttopia_enqueue() {
         );
     }
 
-
-    
     if (is_page('gallary')) {
         wp_enqueue_style(
             'gallary-css',

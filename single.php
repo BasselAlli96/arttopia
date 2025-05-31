@@ -37,4 +37,7 @@ get_header(); ?>
     <?php endwhile; ?>
 </main>
 
+<?php get_template_part('template-part/widget/share-post'); ?>
+<?php get_template_part('template-part/widget/related-content'); ?>
+
 <?php get_footer(); ?>
