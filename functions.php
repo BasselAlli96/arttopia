@@ -44,6 +44,26 @@ function arttopia_enqueue() {
         );
     }
 
+    // only load css for single post
+    if (is_single()) {
+        wp_enqueue_style(
+            'single-post-css',
+            get_template_directory_uri(). '/assets/css/single.css',
+            array(),
+            filemtime(get_template_directory() . '/assets/css/single.css')
+        );
+    }
+
+    if(is_page()) {
+        wp_enqueue_style(
+            'page-css',
+            get_template_directory_uri() . '/assets/css/page.css',
+            array(),
+            filemtime(get_template_directory() . '/assets/css/page.css')
+        );
+    }
+
+
     
     if (is_page('gallary')) {
         wp_enqueue_style(
@@ -99,6 +119,15 @@ function arttopia_enqueue() {
 
 }
 add_action('wp_enqueue_scripts', 'arttopia_enqueue');
+
+
+
+function enqueue_font_awesome() {
+    wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+}
+add_action('wp_enqueue_scripts', 'enqueue_font_awesome');
+
+
 
 
 /**
@@ -201,9 +230,10 @@ function load_theme_parts($context) {
             ],
             'gallery-part' => [
                 'template' => 'singel-gallery',
-                'load_css' => false,
-                'load_js' => false,
-            ]
+            ],
+            // 'comments' => [
+            //     'template' => 'comments-part',
+            // ]
         ]
 ];
     return apply_filters("theme_sections_{$context}", $registry[$context] ?? []);
@@ -279,7 +309,7 @@ function register_artworks_post_type() {
         'has_archive'         => true,
         'rewrite'             => array('slug' => 'artworks'),
         'menu_icon'           => 'dashicons-art',
-        'supports'            => array('title', 'editor', 'thumbnail'),
+        'supports'            => ['title', 'editor', 'thumbnail', 'comments'], 
         'show_in_rest'        => true, // For Gutenberg support
     );
 

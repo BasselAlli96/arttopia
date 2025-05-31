@@ -57,8 +57,8 @@ jQuery(document).ready(function($) {
     var $navUl = $('.nav-ul');
     var $imgLogo =$('.arttopia-logo');
     var $callUsButton = $('.call-us-list');
-    var scrollThreshold = 25;
-    var lastScroll = 60;
+    var scrollThreshold = 40;
+    var lastScroll = 40;
     var ticking = false;
 
     // this function add,remove (.shrink) class from siteheader etc..
